@@ -1,6 +1,8 @@
 import {
+  NativeImportLanguageProfiles,
   createJavaAstNativeImporterAdapter,
   createSemanticImportSidecar,
+  createUniversalCapabilityMatrix,
   runNativeImporterAdapter
 } from '@shapeshift-labs/frontier-lang-compiler';
 
@@ -11,19 +13,29 @@ export const JavaSupportedExtensions = Object.freeze(['.java']);
 
 export const JavaLanguagePackage = Object.freeze({
   packageName: '@shapeshift-labs/frontier-lang-java',
-  version: '0.1.0',
+  version: '0.1.1',
   sourceLanguage: JavaSourceLanguage,
   parser: JavaParser,
   parserAstFormat: JavaParserAstFormat,
   supportedExtensions: JavaSupportedExtensions,
   compilerPackage: '@shapeshift-labs/frontier-lang-compiler',
-  compilerVersion: '0.2.31'
+  compilerVersion: '0.2.39'
 });
+
+export const JavaCapabilityLanguageProfiles = Object.freeze(
+  NativeImportLanguageProfiles.filter((profile) => profile.language === JavaSourceLanguage)
+);
 
 export { createJavaAstNativeImporterAdapter } from '@shapeshift-labs/frontier-lang-compiler';
 
 export function createJavaNativeImporterAdapter(options = {}) {
   return createJavaAstNativeImporterAdapter(options);
+}
+
+export function createJavaLanguageCapabilityMatrix(options = {}) {
+  const languages = options.languages ?? JavaCapabilityLanguageProfiles;
+  const adapters = options.adapters ?? [createJavaNativeImporterAdapter(options.importerOptions ?? {})];
+  return createUniversalCapabilityMatrix({ ...options, languages, adapters });
 }
 
 function mergeAdapterOptions(input = {}, options = {}) {

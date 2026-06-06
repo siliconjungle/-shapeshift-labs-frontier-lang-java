@@ -4,6 +4,7 @@ import {
   JavaParserAstFormat,
   JavaSourceLanguage,
   createJavaNativeImporterAdapter,
+  createJavaLanguageCapabilityMatrix,
   importJavaSource,
   createJavaSemanticImportSidecar
 } from '../dist/index.js';
@@ -25,6 +26,7 @@ const ast = {
 const adapter = createJavaNativeImporterAdapter();
 assert.equal(adapter.language, JavaSourceLanguage);
 assert.equal(JavaLanguagePackage.parserAstFormat, JavaParserAstFormat);
+assert.equal(JavaLanguagePackage.compilerVersion, '0.2.39');
 
 const imported = await importJavaSource({
   sourcePath: 'src/Todo.java',
@@ -36,6 +38,13 @@ assert.equal(imported.adapter.parser, 'javac');
 assert.equal(imported.metadata.astFormat, 'java-ast');
 assert.equal(imported.semanticIndex.symbols.some((symbol) => symbol.name === 'addTodo' && symbol.kind === 'method'), true);
 assert.equal(imported.metadata.nativeImportLossSummary.exactAst, true);
+
+const capability = createJavaLanguageCapabilityMatrix({ imports: [imported], targets: ['typescript', 'rust'] });
+assert.equal(capability.kind, 'frontier.lang.universalCapabilityMatrix');
+assert.equal(capability.languages.length, 1);
+assert.equal(capability.languages[0].language, JavaSourceLanguage);
+assert.equal(capability.summary.imports, 1);
+assert.equal(capability.summary.targetEntries, 2);
 
 const sidecar = await createJavaSemanticImportSidecar({
   sourcePath: 'src/Todo.java',

@@ -2,8 +2,11 @@ import type {
   JavaAstNativeImporterAdapterOptions,
   NativeImporterAdapter,
   NativeImporterAdapterImportResult,
+  NativeImportLanguageProfile,
   SemanticImportSidecar,
-  SemanticImportSidecarOptions
+  SemanticImportSidecarOptions,
+  UniversalCapabilityMatrix,
+  UniversalCapabilityMatrixOptions
 } from '@shapeshift-labs/frontier-lang-compiler';
 
 export declare const JavaSourceLanguage: 'java';
@@ -13,16 +16,17 @@ export declare const JavaSupportedExtensions: readonly string[];
 
 export interface JavaLanguagePackageMetadata {
   readonly packageName: '@shapeshift-labs/frontier-lang-java';
-  readonly version: '0.1.0';
+  readonly version: '0.1.1';
   readonly sourceLanguage: 'java';
   readonly parser: 'javac';
   readonly parserAstFormat: 'java-ast';
   readonly supportedExtensions: readonly string[];
   readonly compilerPackage: '@shapeshift-labs/frontier-lang-compiler';
-  readonly compilerVersion: '0.2.31';
+  readonly compilerVersion: '0.2.39';
 }
 
 export declare const JavaLanguagePackage: JavaLanguagePackageMetadata;
+export declare const JavaCapabilityLanguageProfiles: readonly NativeImportLanguageProfile[];
 
 export { createJavaAstNativeImporterAdapter } from '@shapeshift-labs/frontier-lang-compiler';
 
@@ -61,6 +65,11 @@ export interface JavaSemanticImportSidecarOptions extends JavaSourceImportOption
   readonly regionPrefix?: string;
 }
 
+export interface JavaLanguageCapabilityMatrixOptions extends UniversalCapabilityMatrixOptions {
+  readonly importerOptions?: JavaAstNativeImporterAdapterOptions;
+}
+
 export declare function createJavaNativeImporterAdapter(options?: JavaAstNativeImporterAdapterOptions): NativeImporterAdapter;
+export declare function createJavaLanguageCapabilityMatrix(options?: JavaLanguageCapabilityMatrixOptions): UniversalCapabilityMatrix;
 export declare function importJavaSource(input?: JavaSourceImportInput, options?: JavaSourceImportOptions): Promise<NativeImporterAdapterImportResult>;
 export declare function createJavaSemanticImportSidecar(input?: JavaSourceImportInput, options?: JavaSemanticImportSidecarOptions): Promise<SemanticImportSidecar>;
