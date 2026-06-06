@@ -16,13 +16,13 @@ export declare const JavaSupportedExtensions: readonly string[];
 
 export interface JavaLanguagePackageMetadata {
   readonly packageName: '@shapeshift-labs/frontier-lang-java';
-  readonly version: '0.1.3';
+  readonly version: '0.1.6';
   readonly sourceLanguage: 'java';
   readonly parser: 'javac';
   readonly parserAstFormat: 'java-ast';
   readonly supportedExtensions: readonly string[];
   readonly compilerPackage: '@shapeshift-labs/frontier-lang-compiler';
-  readonly compilerVersion: '0.2.42';
+  readonly compilerVersion: '0.2.47';
 }
 
 export declare const JavaLanguagePackage: JavaLanguagePackageMetadata;
