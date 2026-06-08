@@ -16,7 +16,7 @@ export declare const JavaSupportedExtensions: readonly string[];
 
 export interface JavaLanguagePackageMetadata {
   readonly packageName: '@shapeshift-labs/frontier-lang-java';
-  readonly version: '0.1.7';
+  readonly version: '0.1.8';
   readonly sourceLanguage: 'java';
   readonly parser: 'javac';
   readonly parserAstFormat: 'java-ast';

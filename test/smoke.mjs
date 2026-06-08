@@ -26,7 +26,7 @@ const ast = {
 const adapter = createJavaNativeImporterAdapter();
 assert.equal(adapter.language, JavaSourceLanguage);
 assert.equal(JavaLanguagePackage.parserAstFormat, JavaParserAstFormat);
-assert.equal(JavaLanguagePackage.version, '0.1.7');
+assert.equal(JavaLanguagePackage.version, '0.1.8');
 assert.equal(JavaLanguagePackage.compilerVersion, '0.2.64');
 
 const imported = await importJavaSource({
