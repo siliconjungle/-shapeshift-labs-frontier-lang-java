@@ -26,8 +26,8 @@ const ast = {
 const adapter = createJavaNativeImporterAdapter();
 assert.equal(adapter.language, JavaSourceLanguage);
 assert.equal(JavaLanguagePackage.parserAstFormat, JavaParserAstFormat);
-assert.equal(JavaLanguagePackage.version, '0.1.8');
-assert.equal(JavaLanguagePackage.compilerVersion, '0.2.64');
+assert.equal(JavaLanguagePackage.version, '0.1.10');
+assert.equal(JavaLanguagePackage.compilerVersion, '0.2.68');
 
 const imported = await importJavaSource({
   sourcePath: 'src/Todo.java',
