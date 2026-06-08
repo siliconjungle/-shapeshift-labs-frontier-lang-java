@@ -13,13 +13,13 @@ export const JavaSupportedExtensions = Object.freeze(['.java']);
 
 export const JavaLanguagePackage = Object.freeze({
   packageName: '@shapeshift-labs/frontier-lang-java',
-  version: '0.1.6',
+  version: '0.1.7',
   sourceLanguage: JavaSourceLanguage,
   parser: JavaParser,
   parserAstFormat: JavaParserAstFormat,
   supportedExtensions: JavaSupportedExtensions,
   compilerPackage: '@shapeshift-labs/frontier-lang-compiler',
-  compilerVersion: '0.2.47'
+  compilerVersion: '0.2.64'
 });
 
 export const JavaCapabilityLanguageProfiles = Object.freeze(
