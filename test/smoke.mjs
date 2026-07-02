@@ -26,8 +26,8 @@ const ast = {
 const adapter = createJavaNativeImporterAdapter();
 assert.equal(adapter.language, JavaSourceLanguage);
 assert.equal(JavaLanguagePackage.parserAstFormat, JavaParserAstFormat);
-assert.equal(JavaLanguagePackage.version, '0.1.18');
-assert.equal(JavaLanguagePackage.compilerVersion, '0.2.244');
+assert.equal(JavaLanguagePackage.version, '0.1.19');
+assert.equal(JavaLanguagePackage.compilerVersion, '0.2.331');
 
 const imported = await importJavaSource({
   sourcePath: 'src/Todo.java',
@@ -42,10 +42,9 @@ assert.equal(imported.metadata.nativeImportLossSummary.exactAst, true);
 
 const capability = createJavaLanguageCapabilityMatrix({ imports: [imported], targets: ['typescript', 'rust'] });
 assert.equal(capability.kind, 'frontier.lang.universalCapabilityMatrix');
-assert.equal(capability.languages.length, 1);
-assert.equal(capability.languages[0].language, JavaSourceLanguage);
+assert.equal(capability.languages.some((row) => row.language === JavaSourceLanguage), true);
 assert.equal(capability.summary.imports, 1);
-assert.equal(capability.summary.targetEntries, 2);
+assert.equal(capability.languages.find((row) => row.language === JavaSourceLanguage)?.projection.summary.targetEntries, 2);
 
 const sidecar = await createJavaSemanticImportSidecar({
   sourcePath: 'src/Todo.java',
